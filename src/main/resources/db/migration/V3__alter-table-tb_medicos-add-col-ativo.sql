@@ -1,0 +1,1 @@
+alter table tb_medicos add ativo bool default true;
