@@ -1,8 +1,10 @@
 package br.com.center.medical.api.models.entities;
 
 import br.com.center.medical.api.models.dto.AddMedicoDTO;
+import br.com.center.medical.api.models.dto.PutMedicoDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -23,9 +25,14 @@ public class Medico {
     @Pattern(regexp = "^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ'\\s]+$", message = "Digite apenas letras")
     @Size(min = 2, message = "Nome deve conter ao menos 2 caracteres")
     private String nome;
+
+    // @Pattern(regexp = "[^@ \\t\\r\\n]+@[^@ \\t\\r\\n]+\\.[^@ \\t\\r\\n]+")
     @NotBlank
-    @Pattern(regexp = "[^@ \\t\\r\\n]+@[^@ \\t\\r\\n]+\\.[^@ \\t\\r\\n]+")
     private String email;
+
+    @NotNull
+    @Pattern(regexp = "\\d{8,}")
+    private String telefone;
     @NotBlank
     @Pattern(regexp = "\\d{6}", message = "CRM deve conter 8 digitos")
     private String crm;
@@ -37,9 +44,25 @@ public class Medico {
     public Medico(AddMedicoDTO dados) {
         this.nome = dados.nome();
         this.email = dados.email();
+        this.telefone = dados.telefone();
         this.crm = dados.crm();
         this.especialidade = dados.especialidade();
         this.endereco = new Endereco(dados.endereco());
+    }
+
+    public void atualizarDados(PutMedicoDto dados) {
+        if (dados.nome() != null) {
+            this.nome = dados.nome();
+        }
+
+        if (dados.telefone() != null) {
+            this.telefone = dados.telefone();
+        }
+
+        if (dados.endereco() != null) {
+            this.endereco.atualizarEndereco(dados.endereco());
+        }
+
     }
 
 }

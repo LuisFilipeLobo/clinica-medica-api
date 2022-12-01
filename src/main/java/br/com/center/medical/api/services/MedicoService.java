@@ -2,6 +2,7 @@ package br.com.center.medical.api.services;
 
 import br.com.center.medical.api.models.dto.AddMedicoDTO;
 import br.com.center.medical.api.models.dto.GetMedicosDTO;
+import br.com.center.medical.api.models.dto.PutMedicoDto;
 import br.com.center.medical.api.models.entities.Medico;
 import br.com.center.medical.api.repositories.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,12 @@ public class MedicoService {
         Medico medico = medicoRepository.getReferenceById(id);
 
         return new GetMedicosDTO(medico);
+    }
+
+    public void atualizarMedico(PutMedicoDto dados) {
+        Medico medico = medicoRepository.getReferenceById(dados.id());
+
+        medico.atualizarDados(dados);
     }
 
 }

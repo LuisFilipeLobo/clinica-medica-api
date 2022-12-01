@@ -9,8 +9,13 @@ public record AddMedicoDTO(
         @Size(min = 2, message = "Nome deve conter ao menos 2 caracteres")
         String nome,
 
-        @Email
+        // @Pattern(regexp = "[^@ \\t\\r\\n]+@[^@ \\t\\r\\n]+\\.[^@ \\t\\r\\n]+")
+        @NotBlank
         String email,
+
+        @NotBlank
+        @Pattern(regexp = "\\d{8,}")
+        String telefone,
 
         @NotBlank
         @Pattern(regexp = "\\d{6}", message = "CRM deve conter 8 digitos")
