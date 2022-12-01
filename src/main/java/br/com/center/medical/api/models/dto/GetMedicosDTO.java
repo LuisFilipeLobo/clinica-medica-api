@@ -8,10 +8,10 @@ import java.io.Serializable;
 /**
  * A DTO for the {@link br.com.center.medical.api.models.entities.Medico} entity
  */
-public record ListagemMedicosDTO(Long id, String nome, String email, String crm,
-                                 Especialidade especialidade) implements Serializable {
+public record GetMedicosDTO(Long id, String nome, String email, String crm,
+                            Especialidade especialidade) implements Serializable {
 
-    public ListagemMedicosDTO(Medico medico) {
+    public GetMedicosDTO(Medico medico) {
         this(medico.getId(), medico.getNome(), medico.getEmail(), medico.getCrm(), medico.getEspecialidade());
     }
 

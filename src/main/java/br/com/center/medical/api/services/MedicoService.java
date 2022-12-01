@@ -1,7 +1,7 @@
 package br.com.center.medical.api.services;
 
 import br.com.center.medical.api.models.dto.AddMedicoDTO;
-import br.com.center.medical.api.models.dto.ListagemMedicosDTO;
+import br.com.center.medical.api.models.dto.GetMedicosDTO;
 import br.com.center.medical.api.models.entities.Medico;
 import br.com.center.medical.api.repositories.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +19,14 @@ public class MedicoService {
         medicoRepository.save(new Medico(dados));
     }
 
-    public Page<ListagemMedicosDTO> listarMedicos(Pageable paginado) {
-        return medicoRepository.findAll(paginado).map(ListagemMedicosDTO::new);
+    public Page<GetMedicosDTO> listarMedicos(Pageable paginado) {
+        return medicoRepository.findAll(paginado).map(GetMedicosDTO::new);
     }
 
-    public ListagemMedicosDTO buscarMedico(Long id) {
+    public GetMedicosDTO buscarMedico(Long id) {
         Medico medico = medicoRepository.getReferenceById(id);
 
-        return new ListagemMedicosDTO(medico);
+        return new GetMedicosDTO(medico);
     }
 
 }
