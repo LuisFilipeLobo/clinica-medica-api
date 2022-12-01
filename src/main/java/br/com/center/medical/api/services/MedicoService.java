@@ -23,4 +23,10 @@ public class MedicoService {
         return medicoRepository.findAll(paginado).map(ListagemMedicosDTO::new);
     }
 
+    public ListagemMedicosDTO buscarMedico(Long id) {
+        Medico medico = medicoRepository.getReferenceById(id);
+
+        return new ListagemMedicosDTO(medico);
+    }
+
 }

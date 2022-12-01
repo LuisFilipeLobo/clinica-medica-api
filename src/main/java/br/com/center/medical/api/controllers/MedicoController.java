@@ -4,17 +4,17 @@ import br.com.center.medical.api.models.dto.AddMedicoDTO;
 import br.com.center.medical.api.models.dto.ListagemMedicosDTO;
 import br.com.center.medical.api.services.MedicoService;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@AllArgsConstructor
 @RequestMapping("/api/v1/medicos")
 public class MedicoController {
 
+    @Autowired
     private MedicoService medicoService;
 
     @PostMapping
@@ -26,6 +26,11 @@ public class MedicoController {
     @GetMapping
     public Page<ListagemMedicosDTO> listarMedicos(Pageable paginado) {
         return medicoService.listarMedicos(paginado);
+    }
+
+    @GetMapping("/{id}")
+    public ListagemMedicosDTO buscarMedico(@PathVariable Long id) {
+        return medicoService.buscarMedico(id);
     }
 
 }
