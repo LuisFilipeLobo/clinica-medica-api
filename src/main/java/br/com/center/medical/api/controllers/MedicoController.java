@@ -40,4 +40,16 @@ public class MedicoController {
         medicoService.atualizarMedico(dados);
     }
 
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void desativarMedico(@PathVariable Long id) {
+        medicoService.desativarMedico(id);
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public void ativarMedico(@PathVariable Long id) {
+        medicoService.ativarMedico(id);
+    }
+
 }

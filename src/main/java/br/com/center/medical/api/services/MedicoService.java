@@ -36,4 +36,12 @@ public class MedicoService {
         medico.atualizarDados(dados);
     }
 
+    public void desativarMedico(Long id) {
+        medicoRepository.desativarMedico(id);
+    }
+
+    public void ativarMedico(Long id) {
+        medicoRepository.ativarMedico(id);
+    }
+
 }

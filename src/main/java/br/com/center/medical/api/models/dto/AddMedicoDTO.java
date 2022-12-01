@@ -26,5 +26,7 @@ public record AddMedicoDTO(
 
         @NotNull
         @Valid
-        EnderecoDto endereco) {
+        EnderecoDto endereco,
+
+        Boolean ativo) {
 }
