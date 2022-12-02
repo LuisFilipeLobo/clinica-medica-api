@@ -1,5 +1,6 @@
 package br.com.center.medical.api.models.entities;
 
+
 import br.com.center.medical.api.models.dto.EnderecoDto;
 import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotBlank;
@@ -35,6 +36,7 @@ public class Endereco {
     @NotBlank
     @Pattern(regexp = "(^\\d{5})-?(\\d{3}$)", message = "CEP incorreto")
     private String cep;
+
 
     public Endereco(EnderecoDto dados) {
         this.logradouro = dados.logradouro();
