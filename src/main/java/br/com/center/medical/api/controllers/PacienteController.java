@@ -1,14 +1,15 @@
 package br.com.center.medical.api.controllers;
 
 import br.com.center.medical.api.models.dto.AddPacienteDto;
+import br.com.center.medical.api.models.dto.GetPacienteDto;
 import br.com.center.medical.api.services.PacienteService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -21,6 +22,11 @@ public class PacienteController {
     @Transactional
     public void adicionarPaciente(@RequestBody @Valid AddPacienteDto dados) {
         pacienteService.adicionarPaciente(dados);
+    }
+
+    @GetMapping
+    public Page<GetPacienteDto> listarPacientes(@PageableDefault(sort = "nome") Pageable paginado) {
+        return pacienteService.listarPacientes(paginado);
     }
 
 }

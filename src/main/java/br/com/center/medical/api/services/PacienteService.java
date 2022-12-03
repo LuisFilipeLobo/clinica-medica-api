@@ -1,9 +1,12 @@
 package br.com.center.medical.api.services;
 
 import br.com.center.medical.api.models.dto.AddPacienteDto;
+import br.com.center.medical.api.models.dto.GetPacienteDto;
 import br.com.center.medical.api.models.entities.Paciente;
 import br.com.center.medical.api.repositories.PacienteRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
@@ -13,6 +16,10 @@ public class PacienteService {
 
     public void adicionarPaciente(AddPacienteDto dados){
         pacienteRepository.save(new Paciente(dados));
+    }
+
+    public Page<GetPacienteDto> listarPacientes(Pageable paginado) {
+        return pacienteRepository.findAll(paginado).map(GetPacienteDto::new);
     }
 
 }

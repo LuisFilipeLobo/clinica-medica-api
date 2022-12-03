@@ -24,9 +24,9 @@ public class Paciente extends Usuario {
         this.setNome(dados.nome());
         this.setEmail(dados.email());
         this.setTelefone(dados.telefone());
-        this.setCpf(dados.cpf());
         this.setAtivo(true);
         this.setEndereco(new Endereco(dados.endereco()));
+        this.cpf = dados.cpf();
     }
 
 }
