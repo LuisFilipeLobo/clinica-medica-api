@@ -32,7 +32,7 @@ public class PacienteController {
 
     @PutMapping
     @Transactional
-    public void atualizarDadosPaciente(@RequestBody @Valid PutDadosDto dados){
+    public void atualizarDadosPaciente(@RequestBody @Valid PutDadosDto dados) {
         pacienteService.atualizarDadosPaciente(dados);
     }
 
@@ -40,6 +40,12 @@ public class PacienteController {
     @Transactional
     public void desativarPaciente(@PathVariable Long id) {
         pacienteService.desativarPaciente(id);
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public void ativarPaciente(@PathVariable Long id) {
+        pacienteService.ativarPaciente(id);
     }
 
 }

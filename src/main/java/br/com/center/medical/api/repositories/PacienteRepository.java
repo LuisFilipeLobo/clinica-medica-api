@@ -18,4 +18,8 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long> {
     @Query("UPDATE Paciente p SET p.ativo = false WHERE p.id = :id")
     void desativarPaciente(Long id);
 
+    @Modifying
+    @Query("UPDATE Paciente p SET p.ativo = true WHERE p.id = :id")
+    void ativarPaciente(Long id);
+
 }

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 public class PacienteService {
     private final PacienteRepository pacienteRepository;
 
-    public void adicionarPaciente(AddPacienteDto dados){
+    public void adicionarPaciente(AddPacienteDto dados) {
         pacienteRepository.save(new Paciente(dados));
     }
 
@@ -29,9 +29,12 @@ public class PacienteService {
         paciente.atualizarDados(dados);
     }
 
-    public void desativarPaciente(Long id){
+    public void desativarPaciente(Long id) {
         pacienteRepository.desativarPaciente(id);
     }
 
+    public void ativarPaciente(Long id) {
+        pacienteRepository.ativarPaciente(id);
+    }
 
 }
