@@ -1,5 +1,6 @@
 package br.com.center.medical.api.models.entities;
 
+import br.com.center.medical.api.models.dto.PutDadosDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -35,4 +36,20 @@ public abstract class Usuario {
     private Endereco endereco;
 
     private Boolean ativo;
+
+    public void atualizarDados(PutDadosDto dados) {
+        if (dados.nome() != null) {
+            this.setNome(dados.nome());
+        }
+
+        if (dados.telefone() != null) {
+            this.setTelefone(dados.telefone());
+        }
+
+        if (dados.endereco() != null) {
+            this.setEndereco(new Endereco(dados.endereco()));
+        }
+
+    }
+
 }

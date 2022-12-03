@@ -2,6 +2,7 @@ package br.com.center.medical.api.controllers;
 
 import br.com.center.medical.api.models.dto.AddPacienteDto;
 import br.com.center.medical.api.models.dto.GetPacienteDto;
+import br.com.center.medical.api.models.dto.PutDadosDto;
 import br.com.center.medical.api.services.PacienteService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -27,6 +28,12 @@ public class PacienteController {
     @GetMapping
     public Page<GetPacienteDto> listarPacientes(@PageableDefault(sort = "nome") Pageable paginado) {
         return pacienteService.listarPacientes(paginado);
+    }
+
+    @PutMapping
+    @Transactional
+    public void atualizarDadosPaciente(@RequestBody @Valid PutDadosDto dados){
+        pacienteService.atualizarDadosPaciente(dados);
     }
 
 }
