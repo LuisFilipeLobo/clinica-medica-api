@@ -1,7 +1,6 @@
 package br.com.center.medical.api.models.entities;
 
 import br.com.center.medical.api.models.dto.AddMedicoDTO;
-import br.com.center.medical.api.models.dto.PutMedicoDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -30,21 +29,6 @@ public class Medico extends Usuario {
         this.setAtivo(true);
         this.crm = dados.crm();
         this.especialidade = dados.especialidade();
-    }
-
-    public void atualizarDados(PutMedicoDto dados) {
-        if (dados.nome() != null) {
-            this.setNome(dados.nome());
-        }
-
-        if (dados.telefone() != null) {
-            this.setTelefone(dados.telefone());
-        }
-
-        if (dados.endereco() != null) {
-            this.setEndereco(new Endereco(dados.endereco()));
-        }
-
     }
 
 }

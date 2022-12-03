@@ -2,7 +2,7 @@ package br.com.center.medical.api.controllers;
 
 import br.com.center.medical.api.models.dto.AddMedicoDTO;
 import br.com.center.medical.api.models.dto.GetMedicosDTO;
-import br.com.center.medical.api.models.dto.PutMedicoDto;
+import br.com.center.medical.api.models.dto.PutDadosDto;
 import br.com.center.medical.api.services.MedicoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class MedicoController {
 
     @PutMapping()
     @Transactional
-    public void atualizarMedico(@RequestBody @Valid PutMedicoDto dados) {
+    public void atualizarMedico(@RequestBody @Valid PutDadosDto dados) {
         medicoService.atualizarMedico(dados);
     }
 
