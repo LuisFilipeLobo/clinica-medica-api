@@ -5,12 +5,10 @@ import br.com.center.medical.api.models.dto.GetPacienteDto;
 import br.com.center.medical.api.models.dto.PutDadosDto;
 import br.com.center.medical.api.models.entities.Paciente;
 import br.com.center.medical.api.repositories.PacienteRepository;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @AllArgsConstructor
 @Service
@@ -30,5 +28,10 @@ public class PacienteService {
 
         paciente.atualizarDados(dados);
     }
+
+    public void desativarPaciente(Long id){
+        pacienteRepository.desativarPaciente(id);
+    }
+
 
 }
