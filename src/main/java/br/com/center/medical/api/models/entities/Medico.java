@@ -1,10 +1,16 @@
 package br.com.center.medical.api.models.entities;
 
 import br.com.center.medical.api.models.dto.AddMedicoDTO;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity(name = "Medico")
 @Getter
@@ -15,7 +21,7 @@ import lombok.*;
 public class Medico extends Usuario {
 
     @NotBlank
-    @Pattern(regexp = "\\d{6}", message = "CRM deve conter 8 digitos")
+    @Pattern(regexp = "\\d{6}", message = "CRM deve conter 6 digitos")
     private String crm;
 
     @Enumerated(EnumType.STRING)

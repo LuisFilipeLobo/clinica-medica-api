@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 public record EnderecoDto(
         @NotBlank
-        @Size(min = 4)
+        @Size(min = 2, message = "Deve conter ao menos 2 caracteres")
         String logradouro,
 
         String numero,
@@ -19,18 +19,19 @@ public record EnderecoDto(
         String complemento,
 
         @NotBlank
+        @Size(min = 2, message = "Deve conter ao menos 2 caracteres")
         String bairro,
 
         @NotBlank
+        @Size(min = 2, message = "Deve conter ao menos 2 caracteres")
         String cidade,
 
         @NotBlank
-        @Pattern(regexp = "\\w{2}")
+        @Pattern(regexp = "\\w{2}", message = "Digite somente a sigla do Estado (Ex: CE)")
         String uf,
 
         @NotBlank
         @Pattern(regexp = "(^\\d{5})-?(\\d{3}$)", message = "CEP incorreto")
         String cep
-
 ) implements Serializable {
 }

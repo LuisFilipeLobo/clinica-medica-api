@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Getter
 public class Endereco {
     @NotBlank
-    @Size(min = 4)
+    @Size(min = 2, message = "Deve conter ao menos 2 caracteres")
     private String logradouro;
 
     private String numero;
@@ -24,13 +24,15 @@ public class Endereco {
     private String complemento;
 
     @NotBlank
+    @Size(min = 2, message = "Deve conter ao menos 2 caracteres")
     private String bairro;
 
     @NotBlank
+    @Size(min = 2, message = "Deve conter ao menos 2 caracteres")
     private String cidade;
 
     @NotBlank
-    @Pattern(regexp = "\\w{2}")
+    @Pattern(regexp = "\\w{2}", message = "Digite somente a sigla do Estado (Ex: CE)")
     private String uf;
 
     @NotBlank
