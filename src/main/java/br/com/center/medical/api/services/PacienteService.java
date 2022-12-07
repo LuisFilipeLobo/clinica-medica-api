@@ -5,18 +5,27 @@ import br.com.center.medical.api.models.dto.GetPacienteDto;
 import br.com.center.medical.api.models.dto.PutDadosDto;
 import br.com.center.medical.api.models.entities.Paciente;
 import br.com.center.medical.api.repositories.PacienteRepository;
-import lombok.AllArgsConstructor;
+import br.com.center.medical.api.services.execptions.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-@AllArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class PacienteService {
     private final PacienteRepository pacienteRepository;
 
-    public void adicionarPaciente(AddPacienteDto dados) {
+    public ResponseEntity<GetPacienteDto> adicionarPaciente(AddPacienteDto dados) {
+        Paciente p = new Paciente(dados);
         pacienteRepository.save(new Paciente(dados));
+
+
+        GetPacienteDto dto = new GetPacienteDto(p);
+
+        return new ResponseEntity<>(dto, HttpStatus.CREATED);
     }
 
     public Page<GetPacienteDto> listarPacientes(Pageable paginado) {
@@ -24,16 +33,26 @@ public class PacienteService {
     }
 
     public void atualizarDadosPaciente(PutDadosDto dados) {
-        Paciente paciente = pacienteRepository.getReferenceById(dados.id());
+        Paciente paciente = pacienteRepository.findById(dados.id()).orElseThrow(
+                () -> new EntityNotFoundException(HttpStatus.NOT_FOUND, "Usuário não encontrado")
+        );
 
         paciente.atualizarDados(dados);
     }
 
     public void desativarPaciente(Long id) {
+        pacienteRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException(HttpStatus.NOT_FOUND, "Usuário não encontrado")
+        );
+
         pacienteRepository.desativarPaciente(id);
     }
 
     public void ativarPaciente(Long id) {
+        pacienteRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException(HttpStatus.NOT_FOUND, "Usuário não encontrado")
+        );
+
         pacienteRepository.ativarPaciente(id);
     }
 

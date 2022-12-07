@@ -4,12 +4,13 @@ import br.com.center.medical.api.models.dto.AddPacienteDto;
 import br.com.center.medical.api.models.dto.GetPacienteDto;
 import br.com.center.medical.api.models.dto.PutDadosDto;
 import br.com.center.medical.api.services.PacienteService;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,8 +22,8 @@ public class PacienteController {
 
     @PostMapping
     @Transactional
-    public void adicionarPaciente(@RequestBody @Valid AddPacienteDto dados) {
-        pacienteService.adicionarPaciente(dados);
+    public ResponseEntity<GetPacienteDto> adicionarPaciente(@Validated @RequestBody AddPacienteDto dados) {
+        return pacienteService.adicionarPaciente(dados);
     }
 
     @GetMapping
@@ -32,7 +33,7 @@ public class PacienteController {
 
     @PutMapping
     @Transactional
-    public void atualizarDadosPaciente(@RequestBody @Valid PutDadosDto dados) {
+    public void atualizarDadosPaciente(@Validated @RequestBody PutDadosDto dados) {
         pacienteService.atualizarDadosPaciente(dados);
     }
 

@@ -2,8 +2,8 @@ package br.com.center.medical.api.models.entities;
 
 import br.com.center.medical.api.models.dto.PutDadosDto;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -24,15 +24,16 @@ public abstract class Usuario {
     @Size(min = 2, message = "Nome deve conter ao menos 2 caracteres")
     private String nome;
 
-    // @Pattern(regexp = "[^@ \\t\\r\\n]+@[^@ \\t\\r\\n]+\\.[^@ \\t\\r\\n]+")
     @NotBlank
+    @Pattern(regexp = "[^@ \\t\\r\\n]+@[^@ \\t\\r\\n]+\\.[^@ \\t\\r\\n]+", message = "Email inválido")
     private String email;
 
-    @NotNull
-    @Pattern(regexp = "\\d{8,}")
+    @NotBlank
+    @Pattern(regexp = "\\d{11}", message = "Deve conter 11 dígitos (DDD + número")
     private String telefone;
 
     @Embedded
+    @Valid
     private Endereco endereco;
 
     private Boolean ativo;
